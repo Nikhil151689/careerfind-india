@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     return { title: 'Category Not Found - CareerFind India' };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfindindia.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfind-india.vercel.app';
   const canonicalUrl = `${siteUrl}/categories/${category.slug}`;
 
   return {

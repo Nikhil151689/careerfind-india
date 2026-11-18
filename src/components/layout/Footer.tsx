@@ -90,6 +90,16 @@ export default function Footer() {
               <span>Covering Bengaluru, Hyderabad, Pune, Mumbai, Delhi NCR, Chennai & Remote India</span>
             </div>
 
+            <div className="flex items-center gap-2 text-xs text-slate-300 pt-1">
+              <Mail className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+              <a
+                href="mailto:careerfindjobssupport@gmail.com"
+                className="hover:text-white underline underline-offset-2 transition-colors font-medium"
+              >
+                careerfindjobssupport@gmail.com
+              </a>
+            </div>
+
             <div className="pt-2">
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

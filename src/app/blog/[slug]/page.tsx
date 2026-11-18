@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     return { title: 'Article Not Found - CareerFind India' };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfindindia.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfind-india.vercel.app';
   const canonicalUrl = `${siteUrl}/blog/${post.slug}`;
 
   return {
@@ -57,7 +57,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const allBlogs = await fetchBlogPosts();
   const otherPosts = allBlogs.filter((b) => b.id !== post.id).slice(0, 2);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfindindia.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfind-india.vercel.app';
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',

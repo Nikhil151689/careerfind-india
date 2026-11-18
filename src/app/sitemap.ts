@@ -3,7 +3,7 @@ import { localStore } from '@/lib/data-store';
 import { isJobExpired } from '@/lib/utils';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfindindia.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfind-india.vercel.app';
 
   const staticRoutes = [
     '',

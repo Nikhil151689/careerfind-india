@@ -13,7 +13,7 @@ interface JobStructuredDataProps {
  * - Omits or flags inactive postings if deadline has passed
  * - Includes valid hiringOrganization, jobLocation, datePosted, validThrough, etc.
  */
-export default function JobStructuredData({ job, siteUrl = 'https://careerfindindia.com' }: JobStructuredDataProps) {
+export default function JobStructuredData({ job, siteUrl = 'https://careerfind-india.vercel.app' }: JobStructuredDataProps) {
   const expired = isJobExpired(job.application_deadline);
   
   // Format dates strictly to ISO 8601

@@ -67,7 +67,7 @@ export default function NewsletterSection() {
         </h2>
 
         <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Join over 120,000+ Indian job seekers who receive daily notifications about verified campus recruitment, government exams, and remote tech openings.
+          Join thousands of Indian job seekers who receive notifications about verified campus recruitment, government exams, and remote tech openings.
         </p>
 
         {/* Preference Selector */}

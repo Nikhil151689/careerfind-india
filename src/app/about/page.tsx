@@ -9,12 +9,13 @@ import {
   Award, 
   CheckCircle2, 
   FileText,
-  Target
+  Target,
+  Mail
 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About CareerFind India - Our Mission & Verification Process',
-  description: 'CareerFind India is dedicated to bridging the gap between Indian job seekers and genuine corporate and public sector employers with 100% verified job links.',
+  description: 'CareerFind India is dedicated to bridging the gap between Indian job seekers and genuine corporate and public sector employers with curated, verified job links from official career portals.',
 };
 
 export default function AboutPage() {
@@ -31,7 +32,7 @@ export default function AboutPage() {
           Empowering Indian Careers with Transparency & Trust
         </h1>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          Founded with a clear mission: to eliminate recruitment scams and provide Indian students, freshers, and experienced professionals with genuine, verified employment notifications.
+          Founded with a clear mission: to eliminate recruitment scams and provide Indian students, freshers, and experienced professionals with genuine, manually verified employment notifications curated from official career portals.
         </p>
       </div>
 
@@ -42,7 +43,7 @@ export default function AboutPage() {
             <ShieldCheck className="w-6 h-6" />
           </div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-            100% Official Links
+            Direct Employer Links
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
             Every opening listed on CareerFind India points exclusively to the employer&apos;s verified careers portal (e.g., TCS iON, Infosys Careers, ISRO, SBI) or official government notifications.
@@ -111,11 +112,30 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Support & Contact Desk Section */}
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="space-y-1 text-center sm:text-left">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">
+            Have Questions or Need Assistance?
+          </h3>
+          <p className="text-xs text-slate-600 dark:text-slate-400">
+            Reach out to our official support team for general inquiries or to report any link concerns.
+          </p>
+        </div>
+        <a
+          href="mailto:careerfindjobssupport@gmail.com"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-semibold text-xs border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition-colors whitespace-nowrap"
+        >
+          <Mail className="w-4 h-4" />
+          <span>careerfindjobssupport@gmail.com</span>
+        </a>
+      </div>
+
       {/* CTA */}
-      <div className="text-center pt-4">
+      <div className="text-center pt-2">
         <Link
           href="/jobs"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md"
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md transition-all"
         >
           <span>Explore Verified Openings</span>
           <Briefcase className="w-4 h-4" />

@@ -681,83 +681,298 @@ export const INITIAL_JOBS: Job[] = [
 export const INITIAL_BLOGS: BlogPost[] = [
   {
     id: 'blog-1',
-    title: 'How to Crack the TCS NQT 2025/2026: Complete Syllabus & Preparation Strategy',
+    title: 'How to Crack the TCS NQT: Complete Syllabus & Preparation Strategy',
     slug: 'how-to-crack-tcs-nqt-preparation-guide',
     excerpt: 'Everything you need to know about TCS National Qualifier Test: section-wise marks distribution, coding questions, and tips to secure the Digital (₹7.5 LPA) package.',
-    content: `The TCS National Qualifier Test (NQT) is India’s largest mass hiring assessment for engineering graduates. In this comprehensive guide, our recruitment specialists break down the exact strategy to clear both the Foundation and Advanced sections.
+    content: `The TCS National Qualifier Test (NQT) is India's premier mass hiring assessment for engineering and science graduates. Every year, hundreds of thousands of candidates from the 2025 and 2026 batches compete for placement across the Ninja (₹3.6 LPA), Digital (₹7.5 LPA), and Prime (₹9.0 LPA) cadres.
 
-## 1. Structure of the Exam
-The test consists of Cognitive Skills (Numerical, Verbal, Reasoning Ability) and Advanced Technical Skills (Advanced Quantitative, Advanced Reasoning, and Hands-on Coding).
+In this comprehensive guide, the CareerFind India editorial desk details the test architecture, scoring patterns, and preparation milestones to help you maximize your assessment score.
 
-### Section 1: Foundation Section
-- Numerical Ability (20 questions, 25 mins)
-- Verbal Ability (25 questions, 25 mins)
-- Reasoning Ability (20 questions, 25 mins)
+## 1. Exam Structure & Section Breakdown
 
-### Section 2: Advanced Section
-- Advanced Quantitative Ability (10 questions, 20 mins)
-- Advanced Reasoning Ability (10 questions, 15 mins)
-- Hands-on Coding (2 questions, 55 mins)
+The TCS NQT assessment is conducted on the TCS iON platform and is split into two mandatory parts:
 
-## 2. Digital vs Ninja Cutoffs
-To qualify for the coveted Digital cadre (₹7.5 LPA), candidates must score above 80% in the Advanced Coding and Quantitative sections. Candidates who perform well in Foundation but miss Advanced are offered the Ninja package (₹3.6 LPA).
+### Part A: Foundation Section (Cognitive Skills)
+- **Numerical Ability (20 questions, 25 minutes)**: Number systems, arithmetic progression, percentages, time-speed-distance, work-time, probability, and data interpretation.
+- **Verbal Ability (25 questions, 25 minutes)**: Sentence completion, para-jumbles, error spotting, vocabulary in context, and reading comprehension passages.
+- **Reasoning Ability (20 questions, 25 minutes)**: Blood relations, direction sense, seating arrangements, syllogisms, and coding-decoding puzzles.
 
-## 3. Key Topics to Practice
-- **Data Structures**: Arrays, Hash Maps, Strings, Trees
-- **Algorithms**: Dynamic Programming, Binary Search, Sliding Window
-- **Quantitative**: Permutations, Probability, Time & Work, Geometry
-- **Hands-on Languages**: Java 8+, Python 3, C++ (STL)
+### Part B: Advanced Section (Technical & Coding)
+- **Advanced Quantitative Ability (10 questions, 20 minutes)**: Higher-level combinatorics, geometry, probability, logarithms, and functions.
+- **Advanced Reasoning Ability (10 questions, 15 minutes)**: Complex logical puzzles, analytical arguments, and flowchart inferences.
+- **Hands-on Coding (2 questions, 55 minutes)**: 
+  - *Question 1 (Easy-Medium)*: String manipulation, arrays, or matrix rotations (e.g., finding the longest non-repeating substring).
+  - *Question 2 (Medium-Hard)*: Dynamic programming, sliding window, recursion, or graph traversal.
 
-## 4. Interview Preparation
-After clearing the written round, candidates attend a combined Technical, Managerial, and HR interview. Be ready to explain your final-year project in depth, fundamental OOPs concepts, and database indexing.`,
+## 2. Qualifying Cutoffs for Ninja, Digital & Prime
+
+- **Prime Cadre (₹9.0 LPA)**: Top 2-3% national percentile, flawless performance on both Advanced Coding problems, and high accuracy in Advanced Quants.
+- **Digital Cadre (₹7.5 LPA)**: Complete pass of all test cases on Question 1, at least partial or full pass on Question 2, and >75% in the Advanced aptitude section.
+- **Ninja Cadre (₹3.6 LPA)**: Solid score across the Foundation section with at least one coding question passing sample test cases.
+
+## 3. Top Coding Patterns to Master
+
+TCS iON's compiler supports C, C++, Java, and Python. We strongly recommend writing code in Java (version 8+) or C++ (with STL) to avoid Python recursion depth limits on edge cases:
+
+1. **Arrays & Hash Maps**: Two-sum variations, frequency counting, finding majority elements.
+2. **Strings**: Anagram checks, palindrome verification with alphanumeric filters, run-length encoding.
+3. **Dynamic Programming**: 0/1 Knapsack, Coin Change problem, Longest Common Subsequence (LCS).
+4. **Number Theory**: Prime factorization (Sieve of Eratosthenes), GCD/LCM Euclidean algorithm, modulo arithmetic.
+
+## 4. Technical & HR Interview Checklist
+
+Once you qualify in the written test, TCS calls candidates for a combined panel interview covering three perspectives:
+
+- **Technical Round**: Deep dive into your final-year academic project. Be prepared to explain your system architecture, database schema, and trade-offs. Core questions focus on OOPs principles (Polymorphism vs Encapsulation), normalization (1NF to BCNF), and basic SQL queries (INNER vs LEFT JOIN).
+- **Managerial Round**: Situational questions regarding project deadlines, team conflict resolution, and willingness to adapt to new tech stacks.
+- **HR Round**: Verification of marksheets, academic gap declarations, location preferences, and rotational shift willingness.`,
     cover_image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80',
-    author_name: 'Priya Sharma',
-    author_role: 'Campus Recruitment Specialist',
+    author_name: 'CareerFind Editorial Team',
+    author_role: 'CareerFind India Research & Editorial Desk',
     category: 'Exam Preparation',
     tags: ['TCS NQT', 'Fresher Jobs', 'Campus Placements', 'Coding Interviews'],
-    read_time: '7 min read',
+    read_time: '8 min read',
     is_published: true,
     published_at: '2026-11-14T09:00:00Z',
   },
   {
     id: 'blog-2',
-    title: 'Resume Formats That Pass Indian ATS Scanners in 2025',
+    title: 'Resume Formats That Pass Indian ATS Scanners: 7 Proven Rules for Freshers',
     slug: 'resume-formats-that-pass-indian-ats-scanners',
     excerpt: 'Learn how top Indian IT companies screen resumes automatically, and discover 7 essential rules to ensure your resume reaches real recruiters.',
-    content: `Applicant Tracking Systems (ATS) reject over 70% of resumes before a human recruiter ever sees them. In the competitive Indian job market where a single opening at Infosys, Wipro, or Google receives over 10,000 applications, having an ATS-compliant resume is non-negotiable.
+    content: `Applicant Tracking Systems (ATS) reject over 70% of resumes before a human recruiter ever sees them. In the competitive Indian job market where a single opening at Infosys, Wipro, or Google receives tens of thousands of applications, having an ATS-compliant resume is non-negotiable.
 
-## 1. Single Column Layout is King
-Multi-column layouts with tables, text boxes, and fancy graphics frequently scramble the parsing parser. Stick to a clean single-column format with standard margin spacing.
+## 1. Single-Column Layout is King
+Multi-column layouts with tables, text boxes, and fancy graphics frequently scramble the parsing algorithms used by Taleo, Workday, and Greenhouse. Stick to a clean single-column format with standard margin spacing (0.5 to 0.75 inches).
 
 ## 2. Standard Section Headers
 Never invent creative section names like "What I Did" or "My Toolbox". ATS parsers look for exact standard tokens:
-- Education
-- Work Experience
-- Technical Skills
-- Projects
-- Certifications
+- **Education**
+- **Work Experience / Internships**
+- **Technical Skills**
+- **Projects**
+- **Certifications & Achievements**
 
 ## 3. Match Keywords Naturally
-Parse the target job description. If the opening mentions "PostgreSQL", "Next.js", and "REST APIs", ensure those exact phrases appear in your skills and project bullets.
+Parse the target job description. If the opening mentions "PostgreSQL", "Next.js", and "REST APIs", ensure those exact phrases appear in your skills and project bullets rather than generic synonyms.
 
-## 4. Quantify Your Impact (XYZ Formula)
+## 4. Quantify Your Impact (The XYZ Formula)
 Instead of writing "Built frontend for website", write:
-> "Engineered responsive Next.js frontend with Tailwind CSS, reducing page load times by 40% for 50,000+ monthly active users."
+> "Engineered responsive Next.js frontend with Tailwind CSS, reducing page load times by 40% for over 25,000 active users."
 
-## 5. File Format Advice
-Save and submit your resume as a standard text-based PDF or .docx. Never upload image-based PDFs or scanned documents.`,
+## 5. Clean Contact Information
+Include your official email address, mobile number, GitHub profile, LinkedIn profile, and city/state (e.g., "Bengaluru, Karnataka"). Never include sensitive personal details like date of birth, marital status, or photograph for tech applications.
+
+## 6. Project Presentation Guidelines
+For each project, structure the entry as:
+- **Project Title & Live Link / GitHub Link**
+- **Technologies Used**: React, Node.js, Express, MongoDB, Docker
+- **Bullet 1**: Problem statement and architecture implemented.
+- **Bullet 2**: Measurable outcome or performance optimization achieved.
+
+## 7. File Format Advice
+Save and submit your resume as a standard text-based PDF or .docx. Never upload image-based PDFs or scanned documents that optical character recognition (OCR) might misinterpret.`,
     cover_image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=80',
-    author_name: 'Vikram Mehta',
-    author_role: 'Senior Technical Recruiter',
+    author_name: 'CareerFind Editorial Team',
+    author_role: 'CareerFind India Research & Editorial Desk',
     category: 'Resume & ATS Tips',
     tags: ['Resume Tips', 'ATS Friendly', 'Career Advice', 'Job Search'],
-    read_time: '5 min read',
+    read_time: '6 min read',
     is_published: true,
     published_at: '2026-11-12T11:00:00Z',
   },
   {
     id: 'blog-3',
-    title: 'IT Salary Trends in India: What Developers & Data Engineers Earn in 2025/2026',
+    title: 'Top Core Java, Spring Boot, and SQL Interview Questions for Indian IT Drives',
+    slug: 'top-core-java-spring-boot-sql-interview-questions',
+    excerpt: 'Master the high-frequency technical interview questions asked by TCS, Infosys, Wipro, Cognizant, and product firms for software developer positions.',
+    content: `Java remains the foundational enterprise backbone for the Indian IT ecosystem. Whether you are interviewing for mass recruitment drives or product-focused companies, mastering Core Java, Spring Boot, and relational SQL is mandatory.
+
+Here is the curated set of high-frequency interview questions with technical clarity.
+
+## Part 1: Core Java Foundations
+
+### 1. Difference between String, StringBuilder, and StringBuffer
+- **String**: Immutable. Any modification creates a new object in the String Constant Pool (SCP).
+- **StringBuilder**: Mutable, not thread-safe. Faster performance in single-threaded operations.
+- **StringBuffer**: Mutable, thread-safe (methods are synchronized). Suitable for multi-threaded access.
+
+### 2. How does HashMap work internally in Java 8+?
+HashMap uses an array of Nodes (buckets), where each Node contains key, value, hash, and next pointer. When keys hash to the same bucket index (collision), they form a linked list. In Java 8, when a bucket exceeds 8 elements (TREEIFY_THRESHOLD) and the array capacity is at least 64, the linked list converts to a Red-Black Tree, reducing lookup time from O(n) to O(log n).
+
+### 3. Equals() and HashCode() Contract
+If two objects are equal according to \`equals()\`, they MUST return the same \`hashCode()\`. However, two objects returning the same \`hashCode()\` are not guaranteed to be equal (hash collision).
+
+## Part 2: Spring Boot Microservices
+
+### 1. Key Annotations in Spring Boot
+- \`@RestController\`: Combination of \`@Controller\` and \`@ResponseBody\`.
+- \`@Autowired\`: Enables dependency injection by type.
+- \`@Transactional\`: Manages database transaction boundaries automatically.
+
+### 2. How does Spring Boot Auto-Configuration Work?
+Spring Boot inspects the classpath for dependencies (e.g., \`h2-database\`, \`spring-web\`) via \`@EnableAutoConfiguration\` and conditionally registers pre-configured Spring beans using \`@ConditionalOnClass\` and \`@ConditionalOnMissingBean\`.
+
+## Part 3: High-Frequency SQL Queries
+
+### 1. Finding the Nth Highest Salary
+\`\`\`sql
+SELECT DISTINCT salary 
+FROM employees 
+ORDER BY salary DESC 
+LIMIT 1 OFFSET (N - 1);
+\`\`\`
+Or using window functions:
+\`\`\`sql
+WITH RankedSalaries AS (
+  SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) as rank_num
+  FROM employees
+)
+SELECT salary FROM RankedSalaries WHERE rank_num = 2;
+\`\`\`
+
+### 2. Inner Join vs Left Join
+- **INNER JOIN**: Returns only rows that have matching values in both tables.
+- **LEFT JOIN**: Returns all rows from the left table, and matched rows from the right table; unmatched rows contain NULL.`,
+    cover_image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80',
+    author_name: 'CareerFind Editorial Team',
+    author_role: 'CareerFind India Research & Editorial Desk',
+    category: 'Technical Interviews',
+    tags: ['Java', 'Spring Boot', 'SQL', 'Technical Interview', 'Coding'],
+    read_time: '9 min read',
+    is_published: true,
+    published_at: '2026-11-10T10:00:00Z',
+  },
+  {
+    id: 'blog-4',
+    title: 'Data Analyst & Business Intelligence Career Roadmap for Indian Freshers',
+    slug: 'data-analyst-bi-career-roadmap-india',
+    excerpt: 'Step-by-step roadmap to transition into Data Analytics in India: essential SQL skills, Python libraries, Power BI/Tableau portfolios, and compensation expectations.',
+    content: `With Indian fintech, quick-commerce, and SaaS organizations processing millions of daily transactions, Data Analysts and BI Specialists are among the fastest-growing hiring categories in Bengaluru, Hyderabad, Gurugram, and Pune.
+
+This practical roadmap guides fresh graduates and career changers on acquiring in-demand analytics skills.
+
+## Phase 1: Advanced SQL Mastery (Weeks 1-4)
+SQL is the absolute cornerstone of all analytics interviews:
+- **Foundations**: SELECT, WHERE, GROUP BY, HAVING, ORDER BY.
+- **Joins**: INNER, LEFT, RIGHT, FULL OUTER, CROSS, and SELF joins.
+- **Window Functions**: ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD().
+- **Subqueries & Common Table Expressions (CTEs)**: Writing modular and optimized analytical queries.
+
+## Phase 2: Business Intelligence Tool (Weeks 5-8)
+Choose either **Power BI** (highly demanded in enterprise IT and finance) or **Tableau** (favored in product firms and startups):
+- Data modeling (Star schema vs Snowflake schema).
+- DAX calculations (CALCULATE, RELATED, ALL, SUMX).
+- Interactive KPI dashboards with dynamic drill-through filters.
+
+## Phase 3: Exploratory Data Analysis with Python (Weeks 9-12)
+- **Pandas**: Data cleaning, handling missing values, pivoting, group-bys.
+- **NumPy**: Matrix operations and vector math.
+- **Matplotlib & Seaborn**: Statistical charting (histograms, box plots, heatmaps).
+
+## Phase 4: Capstone Projects That Recruiters Notice
+Avoid generic Titanic or Iris datasets. Build real-world Indian problem-domain dashboards:
+1. **Indian E-Commerce Delivery Analytics**: Analyze delivery SLA breaches, customer ratings, and logistics costs across Indian postal codes.
+2. **UPI Digital Payment Fraud Detection**: Analyze synthetic transaction records to spot anomalous high-velocity UPI transfers.
+
+Publish your datasets and interactive dashboards on GitHub and NovyPro to provide tangible proof of competence.`,
+    cover_image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
+    author_name: 'CareerFind Editorial Team',
+    author_role: 'CareerFind India Research & Editorial Desk',
+    category: 'Career Roadmaps',
+    tags: ['Data Analyst', 'SQL', 'Power BI', 'Python', 'Analytics Roadmap'],
+    read_time: '7 min read',
+    is_published: true,
+    published_at: '2026-11-09T08:30:00Z',
+  },
+  {
+    id: 'blog-5',
+    title: 'AI & Machine Learning Engineer Career Roadmap in India: From Foundations to Production',
+    slug: 'ai-machine-learning-engineer-career-roadmap-india',
+    excerpt: 'A structured blueprint for becoming an AI/ML Engineer in India: mathematical foundations, deep learning frameworks, LLMs, and real-world deployment skills.',
+    content: `The Indian software landscape is witnessing an unprecedented shift toward Artificial Intelligence. Global Capability Centers (GCCs) and product startups in Bengaluru, Hyderabad, and Pune are actively investing in Generative AI, Retrieval-Augmented Generation (RAG), and applied machine learning models.
+
+Here is the realistic curriculum to build an enterprise-grade AI skill set.
+
+## 1. Mathematical Foundations
+Machine learning algorithms are grounded in mathematical principles:
+- **Linear Algebra**: Vectors, matrices, eigenvalues, SVD, and dot products.
+- **Multivariate Calculus**: Gradients, partial derivatives, chain rule (backpropagation).
+- **Probability & Statistics**: Bayes' theorem, normal distributions, p-values, hypothesis testing.
+
+## 2. Machine Learning Essentials
+Master classical algorithms using Python and Scikit-Learn:
+- **Supervised Learning**: Linear/Logistic Regression, Random Forests, XGBoost, LightGBM.
+- **Unsupervised Learning**: K-Means clustering, PCA (Principal Component Analysis).
+- **Evaluation Metrics**: Precision, Recall, F1-Score, ROC-AUC, Mean Squared Error (MSE).
+
+## 3. Deep Learning & Transformers
+- **Frameworks**: PyTorch (industry standard) or TensorFlow/Keras.
+- **Architectures**: Convolutional Neural Networks (CNNs) for vision, Recurrent/Transformer networks for text.
+- **Attention Mechanism**: Self-attention, multi-head attention, and transformer encoders/decoders.
+
+## 4. Modern Generative AI & LLM Engineering
+- **Retrieval-Augmented Generation (RAG)**: Building knowledge-retrieval systems using LangChain, LlamaIndex, and Vector Databases (Pinecone, Chroma, pgvector).
+- **Model Fine-Tuning**: LoRA and QLoRA on open-source weights (Llama 3, Mistral).
+- **Production Serving**: Fast deployment via FastAPI, Docker, and ONNX Runtime.`,
+    cover_image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80',
+    author_name: 'CareerFind Editorial Team',
+    author_role: 'CareerFind India Research & Editorial Desk',
+    category: 'Career Roadmaps',
+    tags: ['AI', 'Machine Learning', 'Python', 'PyTorch', 'Generative AI', 'Career Guide'],
+    read_time: '8 min read',
+    is_published: true,
+    published_at: '2026-11-08T12:00:00Z',
+  },
+  {
+    id: 'blog-6',
+    title: 'How to Apply for Indian Government & PSU Jobs: Bank PO, SSC CGL & Engineering Drives',
+    slug: 'how-to-prepare-apply-indian-government-psu-bank-exams',
+    excerpt: 'A complete handbook on tracking, preparing for, and applying to Indian public sector openings: SBI PO, IBPS, SSC, UPSC, and GATE-based PSU recruitment.',
+    content: `Government and Public Sector Undertaking (PSU) careers offer unparalleled job security, social prestige, and attractive pay structures governed by central/state pay commissions. However, navigating recruitment notifications, age criteria, and multi-tier exams requires strategic discipline.
+
+Here is the complete candidate handbook for public sector opportunities.
+
+## 1. Major Public Sector Categories in India
+
+### Banking Sector (SBI & IBPS)
+- **Positions**: Probationary Officer (PO), Specialist Officer (SO), and Clerical Cadres.
+- **Exam Pattern**: Two-tier written exam (Prelims + Mains) followed by Group Exercises and Personal Interviews.
+- **Key Focus**: Speed mathematics, English language, reasoning puzzles, and General & Financial Awareness.
+
+### Staff Selection Commission (SSC CGL & CHSL)
+- **Positions**: Assistant Section Officer (ASO), Income Tax Inspector, Central Excise Inspector.
+- **Structure**: Computer-based Tier-I and Tier-II tests covering Quantitative Aptitude, Reasoning, English, and General Studies.
+
+### Engineering PSUs via GATE
+- **Organizations**: ISRO, DRDO, ONGC, NTPC, IOCL, BHEL, and PowerGrid.
+- **Selection**: High percentile GATE score followed by GD and Technical Interview rounds.
+
+## 2. Essential Documentation to Keep Ready
+Public sector application portals are strict regarding paperwork:
+1. **Valid Category Certificates**: EWS, OBC-NCL, SC, ST certificates issued in the central government format within the financial year.
+2. **Academic Transcripts**: 10th marksheet (proof of date of birth), graduation degree certificate, and consolidated mark sheets.
+3. **Identity Proof**: Aadhaar card, PAN card, or Voter ID with matching spellings across all records.
+
+## 3. Official Portals to Bookmark
+Never rely on unverified social media forwards. Always verify through:
+- **SBI Careers**: sbi.co.in/web/careers
+- **IBPS Official**: ibps.in
+- **SSC Official**: ssc.gov.in
+- **ISRO Careers**: isro.gov.in/Careers.html
+- **Employment News Gazette**: employmentnews.gov.in`,
+    cover_image: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80',
+    author_name: 'CareerFind Editorial Team',
+    author_role: 'CareerFind India Research & Editorial Desk',
+    category: 'Government & PSU Jobs',
+    tags: ['Government Jobs', 'Bank PO', 'SBI PO', 'SSC CGL', 'PSU Recruitment'],
+    read_time: '7 min read',
+    is_published: true,
+    published_at: '2026-11-06T14:00:00Z',
+  },
+  {
+    id: 'blog-7',
+    title: 'IT Salary Trends in India: What Developers & Data Engineers Earn',
     slug: 'it-salary-trends-in-india-developer-guide',
     excerpt: 'A realistic breakdown of compensation packages across Service companies, Product unicorns, and Global Capability Centers (GCCs) in Bengaluru, Hyderabad & Pune.',
     content: `The Indian tech compensation ecosystem has undergone a significant transformation with the rapid expansion of Global Capability Centers (GCCs) across Bengaluru, Hyderabad, and Pune.
@@ -768,21 +983,21 @@ Save and submit your resume as a standard text-based PDF or .docx. Never upload 
 - **Mass IT Service Companies** (TCS Ninja, Infosys, Wipro, Cognizant): ₹3.6 - ₹4.5 LPA
 - **Specialist & Digital Streams** (TCS Digital, Infosys SP): ₹7.0 - ₹9.5 LPA
 - **Product Startups & Funded Unicorns**: ₹12.0 - ₹22.0 LPA
-- **Tier-1 Tech & GCCs** (Google, Microsoft, Amazon, Uber): ₹24.0 - ₹45.0 LPA (including stocks)
+- **Tier-1 Tech & GCCs** (Google, Microsoft, Amazon, Uber): ₹24.0 - ₹45.0 LPA (including stock grants)
 
 ### 2. Mid Level (3-6 Years)
 Full-Stack Developers proficient in Next.js, Node.js, and Cloud Infrastructure are witnessing high demand, with median offers averaging ₹18 to ₹28 LPA in Bengaluru and Hyderabad.
 
 ### 3. AI & Data Engineering Surge
-Roles involving LLM fine-tuning, vector databases, and enterprise data mesh are commanding a 35% salary premium over traditional web engineering.`,
+Roles involving LLM fine-tuning, vector databases, and enterprise data pipelines are commanding a 35% salary premium over traditional web engineering.`,
     cover_image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80',
-    author_name: 'Ananya Sen',
-    author_role: 'HR & Compensation Analyst',
+    author_name: 'CareerFind Editorial Team',
+    author_role: 'CareerFind India Research & Editorial Desk',
     category: 'Salary & Market Insights',
     tags: ['Salary Trends', 'Tech Jobs', 'Bengaluru IT', 'GCC India'],
     read_time: '6 min read',
     is_published: true,
-    published_at: '2026-11-08T14:30:00Z',
+    published_at: '2026-11-05T16:30:00Z',
   },
 ];
 

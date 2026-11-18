@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: JobDetailsPageProps): Promise
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfindindia.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfind-india.vercel.app';
   const canonicalUrl = `${siteUrl}/jobs/${job.slug}`;
 
   return {
@@ -82,7 +82,7 @@ export default async function JobDetailsPage({ params }: JobDetailsPageProps) {
 
   const expired = isJobExpired(job.application_deadline);
   const daysLeft = getDaysLeft(job.application_deadline);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfindindia.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfind-india.vercel.app';
   
   // Related jobs
   const relatedJobs = await fetchRelatedJobs(job.id, job.category_id, 3);

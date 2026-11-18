@@ -13,7 +13,7 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfindindia.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careerfind-india.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: '%s | CareerFind India',
   },
   description:
-    'Search 10,000+ verified jobs across India: IT & Software, B.Tech freshers, Work from home, Data Analysts, Bank PO and Government recruitment drives.',
+    'Search verified jobs across India: IT & Software, B.Tech freshers, Work from home, Data Analysts, Bank PO, and Government recruitment drives.',
   keywords: [
     'Jobs in India',
     'Fresher jobs',

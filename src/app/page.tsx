@@ -60,7 +60,7 @@ export default async function HomePage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-xs font-bold text-indigo-700 dark:text-indigo-300 shadow-sm animate-in fade-in slide-in-from-top-2">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Over 1,500+ New Vacancies Added This Week</span>
+            <span>Verified Recruitment Drives &amp; Career Notifications</span>
           </div>
 
           {/* Main Title */}
@@ -77,30 +77,30 @@ export default async function HomePage() {
             <JobSearchHero />
           </div>
 
-          {/* Highlight Stats */}
+          {/* Highlight Stats - Authentic & Real Dynamic Counts */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto pt-8 border-t border-slate-200/60 dark:border-slate-800/80 text-left">
             <div className="p-3">
               <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-                100%
+                Direct
               </div>
               <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                Verified Official Links
+                Official Career Links
               </div>
             </div>
             <div className="p-3">
               <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
-                10,000+
+                {allJobsData.total || allJobs.length}+
               </div>
               <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                Active Listings
+                Active Openings
               </div>
             </div>
             <div className="p-3">
               <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-                500+
+                Pan-India
               </div>
               <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                Top Indian Employers
+                Tech, Govt &amp; Internships
               </div>
             </div>
             <div className="p-3">

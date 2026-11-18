@@ -673,52 +673,112 @@ VALUES
 )
 ON CONFLICT (slug) DO NOTHING;
 
--- 4. Insert Career Advice Blog Articles
+-- 4. Insert Career Advice Blog Articles (7 Comprehensive Guides)
 INSERT INTO public.blog_posts (id, title, slug, excerpt, content, cover_image, author_name, author_role, category, tags, read_time, is_published, published_at)
 VALUES
 (
     'b1111111-1111-1111-1111-111111111101',
-    'How to Crack the TCS NQT 2025/2026: Complete Syllabus & Preparation Strategy',
+    'How to Crack the TCS NQT: Complete Syllabus & Preparation Strategy',
     'how-to-crack-tcs-nqt-preparation-guide',
     'Everything you need to know about TCS National Qualifier Test: section-wise marks distribution, coding questions, and tips to secure the Digital (₹7.5 LPA) package.',
     'The TCS National Qualifier Test (NQT) is India’s largest mass hiring assessment for engineering graduates. In this comprehensive guide, our recruitment specialists break down the exact strategy to clear both the Foundation and Advanced sections...\n\n### 1. Structure of the Exam\nThe test consists of Cognitive Skills (Numerical, Verbal, Reasoning Ability) and Advanced Technical Skills (Advanced Quantitative, Advanced Reasoning, and Hands-on Coding).\n\n### 2. Digital vs Ninja Cutoffs\nTo qualify for the coveted Digital cadre (₹7.5 LPA), candidates must score above 80% in the Advanced Coding and Quantitative sections.\n\n### 3. Key Topics to Practice\n- Dynamic Programming and Array manipulations\n- Time and space complexity optimization\n- Probability, Permutations & Combinations, and Data Interpretation.',
     'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80',
-    'Priya Sharma',
-    'Campus Recruitment Specialist',
+    'CareerFind Editorial Team',
+    'CareerFind India Research & Editorial Desk',
     'Exam Preparation',
     ARRAY['TCS NQT', 'Fresher Jobs', 'Campus Placements', 'Coding Interviews'],
-    '7 min read',
+    '8 min read',
     true,
     NOW() - INTERVAL '4 days'
 ),
 (
     'b1111111-1111-1111-1111-111111111102',
-    'Resume Formats That Pass Indian ATS Scanners in 2025',
+    'Resume Formats That Pass Indian ATS Scanners: 7 Proven Rules for Freshers',
     'resume-formats-that-pass-indian-ats-scanners',
     'Learn how top Indian IT companies screen resumes automatically, and discover 7 essential rules to ensure your resume reaches real recruiters.',
     'Applicant Tracking Systems (ATS) reject over 70% of resumes before a human recruiter ever sees them. In the competitive Indian job market where a single opening at Infosys, Wipro, or Google receives over 10,000 applications, having an ATS-compliant resume is non-negotiable...\n\n### Key Rules:\n1. Use standard single-column layouts without nested tables.\n2. Keep standard headers: "Education", "Work Experience", "Projects", "Technical Skills".\n3. Match exact keywords found in the job description.\n4. Quantify your achievements using metrics (e.g. "Improved API response times by 35%").',
     'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=80',
-    'Vikram Mehta',
-    'Senior Technical Recruiter',
+    'CareerFind Editorial Team',
+    'CareerFind India Research & Editorial Desk',
     'Resume & ATS Tips',
     ARRAY['Resume Tips', 'ATS Friendly', 'Career Advice', 'Job Search'],
-    '5 min read',
+    '6 min read',
     true,
     NOW() - INTERVAL '6 days'
 ),
 (
     'b1111111-1111-1111-1111-111111111103',
-    'IT Salary Trends in India: What Developers & Data Engineers Earn in 2025/2026',
+    'Top Core Java, Spring Boot, and SQL Interview Questions for Indian IT Drives',
+    'top-core-java-spring-boot-sql-interview-questions',
+    'Master the high-frequency technical interview questions asked by TCS, Infosys, Wipro, Cognizant, and product firms for software developer positions.',
+    'Java remains the foundational enterprise backbone for the Indian IT ecosystem. Whether you are interviewing for mass recruitment drives or product-focused companies, mastering Core Java, Spring Boot, and relational SQL is mandatory...\n\n### High-Frequency Questions:\n1. String vs StringBuilder vs StringBuffer immutability\n2. HashMap internals and Red-Black tree conversion in Java 8\n3. Spring Boot auto-configuration mechanisms\n4. Finding Nth highest salary using SQL DENSE_RANK()',
+    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80',
+    'CareerFind Editorial Team',
+    'CareerFind India Research & Editorial Desk',
+    'Technical Interviews',
+    ARRAY['Java', 'Spring Boot', 'SQL', 'Technical Interview', 'Coding'],
+    '9 min read',
+    true,
+    NOW() - INTERVAL '8 days'
+),
+(
+    'b1111111-1111-1111-1111-111111111104',
+    'Data Analyst & Business Intelligence Career Roadmap for Indian Freshers',
+    'data-analyst-bi-career-roadmap-india',
+    'Step-by-step roadmap to transition into Data Analytics in India: essential SQL skills, Python libraries, Power BI/Tableau portfolios, and compensation expectations.',
+    'With Indian fintech, quick-commerce, and SaaS organizations processing millions of daily transactions, Data Analysts and BI Specialists are among the fastest-growing hiring categories in Bengaluru, Hyderabad, Gurugram, and Pune...\n\n### Essential Skill Modules:\n1. Advanced SQL: Window functions, CTEs, and query optimization\n2. BI Visualization: Power BI (DAX) and Tableau dynamic drill-downs\n3. Python for Analytics: Pandas, NumPy, and Seaborn\n4. Domain Capstones: Indian e-commerce delivery analytics and UPI fraud analysis.',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
+    'CareerFind Editorial Team',
+    'CareerFind India Research & Editorial Desk',
+    'Career Roadmaps',
+    ARRAY['Data Analyst', 'SQL', 'Power BI', 'Python', 'Analytics Roadmap'],
+    '7 min read',
+    true,
+    NOW() - INTERVAL '9 days'
+),
+(
+    'b1111111-1111-1111-1111-111111111105',
+    'AI & Machine Learning Engineer Career Roadmap in India: From Foundations to Production',
+    'ai-machine-learning-engineer-career-roadmap-india',
+    'A structured blueprint for becoming an AI/ML Engineer in India: mathematical foundations, deep learning frameworks, LLMs, and real-world deployment skills.',
+    'The Indian software landscape is witnessing an unprecedented shift toward Artificial Intelligence. Global Capability Centers (GCCs) and product startups in Bengaluru, Hyderabad, and Pune are actively investing in Generative AI, Retrieval-Augmented Generation (RAG), and applied machine learning models...\n\n### Core Stages:\n1. Mathematics: Linear algebra, multivariable calculus, and probability\n2. Classical ML: Scikit-learn, XGBoost, and ROC-AUC evaluation\n3. Deep Learning: PyTorch, Transformers, and Attention mechanisms\n4. GenAI: RAG architectures with LangChain and pgvector databases.',
+    'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80',
+    'CareerFind Editorial Team',
+    'CareerFind India Research & Editorial Desk',
+    'Career Roadmaps',
+    ARRAY['AI', 'Machine Learning', 'Python', 'PyTorch', 'Generative AI', 'Career Guide'],
+    '8 min read',
+    true,
+    NOW() - INTERVAL '10 days'
+),
+(
+    'b1111111-1111-1111-1111-111111111106',
+    'How to Apply for Indian Government & PSU Jobs: Bank PO, SSC CGL & Engineering Drives',
+    'how-to-prepare-apply-indian-government-psu-bank-exams',
+    'A complete handbook on tracking, preparing for, and applying to Indian public sector openings: SBI PO, IBPS, SSC, UPSC, and GATE-based PSU recruitment.',
+    'Government and Public Sector Undertaking (PSU) careers offer unparalleled job security, social prestige, and attractive pay structures governed by central/state pay commissions. However, navigating recruitment notifications, age criteria, and multi-tier exams requires strategic discipline...\n\n### Sectors Covered:\n- Banking: SBI PO, IBPS PO / Specialist Officers\n- Staff Selection: SSC CGL, SSC CHSL\n- PSUs: ISRO, DRDO, ONGC, and IOCL via GATE\n- Official Verification Portals: sbi.co.in/careers, isro.gov.in, ssc.gov.in',
+    'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80',
+    'CareerFind Editorial Team',
+    'CareerFind India Research & Editorial Desk',
+    'Government & PSU Jobs',
+    ARRAY['Government Jobs', 'Bank PO', 'SBI PO', 'SSC CGL', 'PSU Recruitment'],
+    '7 min read',
+    true,
+    NOW() - INTERVAL '12 days'
+),
+(
+    'b1111111-1111-1111-1111-111111111107',
+    'IT Salary Trends in India: What Developers & Data Engineers Earn',
     'it-salary-trends-in-india-developer-guide',
     'A realistic breakdown of compensation packages across Service companies, Product unicorns, and Global Capability Centers (GCCs) in Bengaluru, Hyderabad & Pune.',
     'The Indian tech compensation ecosystem has undergone a significant transformation with the rapid expansion of Global Capability Centers (GCCs) across Bengaluru, Hyderabad, and Pune...\n\n### Fresher Tier:\n- Service IT Firms: ₹3.5 LPA - ₹4.5 LPA\n- Digital Specialist Tracks: ₹7.0 LPA - ₹9.5 LPA\n- Product Tier-1 & Unicorns: ₹16 LPA - ₹28 LPA\n\n### 3-5 Years Experienced:\nFull-Stack Developers with Next.js/React and Go/Java command ₹18 - ₹30 LPA across Tier-1 hubs.',
     'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80',
-    'Ananya Sen',
-    'HR & Compensation Analyst',
+    'CareerFind Editorial Team',
+    'CareerFind India Research & Editorial Desk',
     'Salary & Market Insights',
     ARRAY['Salary Trends', 'Tech Jobs', 'Bengaluru IT', 'GCC India'],
     '6 min read',
     true,
-    NOW() - INTERVAL '10 days'
+    NOW() - INTERVAL '14 days'
 )
 ON CONFLICT (slug) DO NOTHING;

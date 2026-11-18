@@ -12,8 +12,8 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Advertise With Us - Reach 250,000+ Indian Job Seekers',
-  description: 'Promote your recruitment drives, edtech courses, and career certifications to high-intent engineering freshers, data analysts, and tech professionals across India.',
+  title: 'Advertise With Us - CareerFind India Partnerships',
+  description: 'Partner with CareerFind India to promote verified recruitment drives, technical hiring events, and career opportunities to high-intent engineering freshers and tech professionals across India.',
 };
 
 export default function AdvertisePage() {
@@ -22,25 +22,25 @@ export default function AdvertisePage() {
       title: 'Homepage Top Leaderboard',
       placement: 'homepage-banner',
       dimensions: '970x90 / 728x90 Responsive',
-      description: 'Maximum visibility at the top of the portal viewed by every visitor.',
+      description: 'Maximum visibility at the top of the portal viewed by every visitor arriving on the platform.',
     },
     {
       title: 'Job Search In-Feed Native Ad',
       placement: 'listing-infeed',
       dimensions: 'Fluid Responsive Card',
-      description: 'Integrated seamlessly between active search results with clear "Sponsored" labeling.',
+      description: 'Integrated seamlessly between active search results with clear "Advertisement" labeling.',
     },
     {
       title: 'Job Details Sidebar Ad',
       placement: 'sidebar',
       dimensions: '300x250 / 300x600 Half-Page',
-      description: 'High engagement placement beside the primary "Apply Now" application box.',
+      description: 'Clean desktop sidebar placement beside job overview details, safely segregated from apply buttons.',
     },
     {
       title: 'Blog In-Article Contextual Ad',
       placement: 'blog-inarticle',
       dimensions: 'Responsive In-Content',
-      description: 'Positioned within high-ranking career guides (TCS NQT, resume templates, salary guides).',
+      description: 'Positioned within high-quality career guides (TCS NQT preparation, resume templates, technical interview guides).',
     },
   ];
 
@@ -57,27 +57,27 @@ export default function AdvertisePage() {
           Connect with India&apos;s Ambitious Tech & Fresher Talent
         </h1>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          Over 250,000+ monthly page views from engineering students, B.Tech freshers, software engineers, and government exam aspirants across India.
+          Reach motivated engineering students, B.Tech/MCA freshers, software developers, data analysts, and banking/government exam aspirants across India searching for verified opportunities.
         </p>
       </div>
 
-      {/* Metrics Grid */}
+      {/* Value Proposition Grid - Truthful, Non-fabricated */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600">250K+</div>
-          <div className="text-xs text-slate-500 mt-1">Monthly Active Views</div>
+          <div className="text-lg sm:text-xl font-extrabold text-indigo-600 dark:text-indigo-400">Targeted</div>
+          <div className="text-xs text-slate-500 mt-1">Tech & Fresher Audience</div>
         </div>
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="text-2xl sm:text-3xl font-extrabold text-purple-600">68%</div>
-          <div className="text-xs text-slate-500 mt-1">B.Tech / MCA Freshers</div>
+          <div className="text-lg sm:text-xl font-extrabold text-purple-600 dark:text-purple-400">Pan-India</div>
+          <div className="text-xs text-slate-500 mt-1">Tier-1, 2 & Remote Hubs</div>
         </div>
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Top Hubs</div>
-          <div className="text-xs text-slate-500 mt-1">BLR, HYD, PNQ, DEL, CHE</div>
+          <div className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Curated</div>
+          <div className="text-xs text-slate-500 mt-1">High-Intent Job Seekers</div>
         </div>
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600">100%</div>
-          <div className="text-xs text-slate-500 mt-1">Brand Safety & Quality</div>
+          <div className="text-lg sm:text-xl font-extrabold text-emerald-600 dark:text-emerald-400">100% Safe</div>
+          <div className="text-xs text-slate-500 mt-1">Brand-Safe Environment</div>
         </div>
       </div>
 
@@ -103,7 +103,7 @@ export default function AdvertisePage() {
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 {slot.description}
               </p>
-              <div className="pt-2 text-[11px] text-indigo-600 font-semibold">
+              <div className="pt-2 text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
                 Placement Key: <code className="font-mono">{slot.placement}</code>
               </div>
             </div>
@@ -130,18 +130,18 @@ export default function AdvertisePage() {
       {/* Inquire CTA */}
       <div className="p-8 rounded-3xl bg-gradient-to-r from-indigo-900 to-purple-900 text-white text-center space-y-4">
         <h3 className="text-xl sm:text-2xl font-bold">
-          Ready to Advertise with Us?
+          Ready to Partner with Us?
         </h3>
         <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-          Contact our advertising partnerships team for custom media kits, direct brand integrations, and programmatic inquiries.
+          Contact our team directly for custom placements, verified recruitment drive features, and programmatic advertising enquiries.
         </p>
         <div className="pt-2">
           <a
-            href="mailto:advertise@careerfindindia.com"
+            href="mailto:careerfindjobssupport@gmail.com"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-indigo-950 font-bold text-xs hover:bg-slate-100 shadow-lg transition-all"
           >
             <Mail className="w-4 h-4 text-indigo-600" />
-            <span>Email advertise@careerfindindia.com</span>
+            <span>Email careerfindjobssupport@gmail.com</span>
           </a>
         </div>
       </div>

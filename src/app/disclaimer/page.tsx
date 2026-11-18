@@ -76,7 +76,7 @@ export default function DisclaimerPage() {
           3. How to Report Suspected Scams
         </h2>
         <p>
-          If you encounter any job listing or third-party party misusing our name or requesting monetary transactions, please notify our grievance cell immediately at <a href="mailto:fraud-alert@careerfindindia.com" className="text-indigo-600 underline font-medium">fraud-alert@careerfindindia.com</a> so we can take immediate action and update our public warnings.
+          If you encounter any job listing or third-party party misusing our name or requesting monetary transactions, please notify our grievance cell immediately at <a href="mailto:careerfindjobssupport@gmail.com" className="text-indigo-600 dark:text-indigo-400 underline font-medium">careerfindjobssupport@gmail.com</a> so we can take immediate action and update our public warnings.
         </p>
       </div>
 

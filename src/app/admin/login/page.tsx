@@ -75,7 +75,7 @@ export default function AdminLoginPage() {
         }
 
         // Allow fallback demo login with demo credentials
-        if (email === 'admin@careerfindindia.com' || (email.includes('admin') && password === 'admin123')) {
+        if (email === 'careerfindjobssupport@gmail.com' || (email.includes('admin') && password === 'admin123')) {
           localStorage.setItem('admin_authenticated', 'true');
           router.push('/admin');
           return;
@@ -91,7 +91,7 @@ export default function AdminLoginPage() {
           return;
         }
       } catch (err: unknown) {
-        if (email === 'admin@careerfindindia.com' || (email.includes('admin') && password === 'admin123')) {
+        if (email === 'careerfindjobssupport@gmail.com' || (email.includes('admin') && password === 'admin123')) {
           localStorage.setItem('admin_authenticated', 'true');
           router.push('/admin');
           return;
@@ -103,7 +103,7 @@ export default function AdminLoginPage() {
     }
 
     // 3. Fallback / Demo Auth
-    if (email === 'admin@careerfindindia.com' || email.includes('admin') || password === 'admin123') {
+    if (email === 'careerfindjobssupport@gmail.com' || email.includes('admin') || password === 'admin123') {
       localStorage.setItem('admin_authenticated', 'true');
       router.push('/admin');
     } else {
@@ -162,7 +162,7 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@careerfindindia.com"
+                  placeholder="careerfindjobssupport@gmail.com"
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
                 />
               </div>
