@@ -1,6 +1,19 @@
-import { Job, Company, Category, BlogPost, JobFilterParams, Subscriber } from '@/types/job';
-import { isSupabaseConfigured, getSupabaseClient } from './supabase';
+import { 
+  Job, 
+  Company, 
+  Category, 
+  BlogPost, 
+  JobFilterParams, 
+  Subscriber,
+  CollectedJob,
+  CollectorRun,
+  CollectorStats,
+  CollectedJobStatus,
+  ExtractedJobPayload
+} from '@/types/job';
+import { isSupabaseConfigured, getSupabaseClient, getSupabaseAdmin } from './supabase';
 import { slugify, isJobExpired } from './utils';
+import { normalizeUrl, generateMatchKey, checkDuplicateJob } from './collector-dedup';
 
 // ==============================================================================
 // SEED DATA FOR PRODUCTION FALLBACK / LOCAL DEV
@@ -1011,6 +1024,124 @@ class LocalJobStore {
   private companies: Company[] = [...INITIAL_COMPANIES];
   private blogs: BlogPost[] = [...INITIAL_BLOGS];
   private subscribers: Subscriber[] = [];
+  private collectedJobs: CollectedJob[] = [
+    {
+      id: 'col-sample-1',
+      source_name: 'National Career Service',
+      official_apply_url: 'https://www.isro.gov.in/Careers.html',
+      source_url: 'https://www.isro.gov.in/Careers.html',
+      title: 'ISRO ICRB Scientist / Engineer SC (Computer Science & Electronics)',
+      company_name: 'Indian Space Research Organisation',
+      category_slug: 'government-jobs',
+      location: 'Bengaluru / Thiruvananthapuram / Sriharikota',
+      work_mode: 'In-Office',
+      job_type: 'Full-Time',
+      experience_level: 'Fresher',
+      experience_min: 0,
+      experience_max: 2,
+      salary_text: 'Level 10 Pay Matrix (Approx. ₹85,000 - ₹1,05,000/month + Central Govt Perks)',
+      qualification: 'B.E / B.Tech in CS / IT / Electronics with min 65% aggregate or 6.84 CGPA',
+      skills: ['Embedded Systems', 'C/C++', 'RTOS', 'Linux Kernel', 'Satellite Telemetry'],
+      description: 'ISRO Centralised Recruitment Board invites applications for Scientist/Engineer ‘SC’ positions across ISRO centres for satellite mission software and payload telemetry.',
+      responsibilities: [
+        'Develop mission-critical flight software and real-time telemetry processing systems.',
+        'Conduct hardware-in-the-loop (HIL) testing for launch vehicle flight control modules.'
+      ],
+      eligibility_criteria: [
+        'Valid GATE score or clearance of ISRO Centralised Written Examination.',
+        'Must be an Indian Citizen. Age limit: 28 years.'
+      ],
+      application_deadline: '2026-12-28',
+      is_fresher: true,
+      is_government: true,
+      is_wfh: false,
+      is_internship: false,
+      is_walkin: false,
+      status: 'pending',
+      is_duplicate: false,
+      created_at: new Date(Date.now() - 3600000).toISOString(),
+    },
+    {
+      id: 'col-sample-2',
+      source_name: 'Open Remote Tech Syndicate',
+      official_apply_url: 'https://careers.google.com',
+      source_url: 'https://remotive.com',
+      title: 'Full-Stack Software Engineer (React, Node.js & Cloud)',
+      company_name: 'Modern Cloud Solutions',
+      category_slug: 'work-from-home',
+      location: 'Remote - Anywhere in India',
+      work_mode: 'Work From Home',
+      job_type: 'Full-Time',
+      experience_level: '0-2 Years',
+      experience_min: 0,
+      experience_max: 2,
+      salary_text: 'Not Disclosed',
+      qualification: 'B.Tech / B.Sc / BCA in Computer Science or equivalent practical experience',
+      skills: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Docker'],
+      description: 'Seeking proactive Junior/Mid Full-Stack Developers to build resilient cloud dashboards and APIs for merchant enterprises. 100% remote across India.',
+      responsibilities: [
+        'Develop accessible UI components with Next.js and Tailwind CSS.',
+        'Write clean REST and GraphQL endpoints backed by PostgreSQL.'
+      ],
+      eligibility_criteria: [
+        'Strong hands-on foundation in JavaScript/TypeScript.',
+        'Clear written and verbal asynchronous communication.'
+      ],
+      application_deadline: '2026-12-25',
+      is_fresher: true,
+      is_government: false,
+      is_wfh: true,
+      is_internship: false,
+      is_walkin: false,
+      status: 'pending',
+      is_duplicate: false,
+      created_at: new Date(Date.now() - 7200000).toISOString(),
+    },
+    {
+      id: 'col-sample-3',
+      source_name: 'Official Campus Career Portal',
+      official_apply_url: 'https://www.tcs.com/careers/india/entry-level-hiring',
+      source_url: 'https://www.tcs.com/careers/india/entry-level-hiring',
+      title: 'TCS National Qualifier Test (NQT) - Ninja & Digital Cadre',
+      company_name: 'Tata Consultancy Services',
+      category_slug: 'btech-fresher-jobs',
+      location: 'Pan India (Bengaluru, Pune, Hyderabad, Chennai, Delhi NCR)',
+      work_mode: 'In-Office',
+      job_type: 'Full-Time',
+      experience_level: 'Fresher',
+      experience_min: 0,
+      experience_max: 1,
+      salary_text: '₹3.6 - ₹7.5 LPA',
+      qualification: 'B.E / B.Tech / M.E / M.Tech / MCA / M.Sc (CS/IT)',
+      skills: ['Java', 'Python', 'C++', 'SQL', 'Data Structures', 'Algorithms'],
+      description: 'Tata Consultancy Services nationwide campus recruitment drive.',
+      responsibilities: ['Develop enterprise applications across cloud and on-premise environments.'],
+      eligibility_criteria: ['Minimum 60% aggregate. Year of Graduation: 2025 or 2026 batches.'],
+      application_deadline: '2026-12-31',
+      is_fresher: true,
+      is_government: false,
+      is_wfh: false,
+      is_internship: false,
+      is_walkin: false,
+      status: 'pending',
+      is_duplicate: true,
+      duplicate_reason: 'Matches official apply URL of active job "TCS National Qualifier Test (NQT)"',
+      matched_job_id: 'job-1',
+      created_at: new Date(Date.now() - 10800000).toISOString(),
+    }
+  ];
+  private collectorRuns: CollectorRun[] = [
+    {
+      id: 'run-init-1',
+      triggered_by: 'n8n_cron',
+      jobs_collected: 3,
+      jobs_pending: 2,
+      duplicates_found: 1,
+      status: 'completed',
+      started_at: new Date(Date.now() - 10800000).toISOString(),
+      completed_at: new Date(Date.now() - 10750000).toISOString(),
+    }
+  ];
 
   // ---------------------------------------------------------------------------
   // JOBS
@@ -1225,6 +1356,24 @@ class LocalJobStore {
     return this.companies.find((c) => c.slug === slug);
   }
 
+  public createCompany(data: Partial<Company>): Company {
+    const id = data.id || `comp-${Date.now()}`;
+    const newComp: Company = {
+      id,
+      name: data.name || 'Company',
+      slug: data.slug || slugify(data.name || 'company'),
+      logo_url: data.logo_url,
+      website_url: data.website_url,
+      industry: data.industry,
+      headquarters: data.headquarters || 'Bengaluru, India',
+      description: data.description,
+      verified: data.verified ?? true,
+      created_at: new Date().toISOString(),
+    };
+    this.companies.push(newComp);
+    return newComp;
+  }
+
   // ---------------------------------------------------------------------------
   // BLOG POSTS
   // ---------------------------------------------------------------------------
@@ -1256,6 +1405,141 @@ class LocalJobStore {
 
   public getSubscribers(): Subscriber[] {
     return [...this.subscribers];
+  }
+
+  // ---------------------------------------------------------------------------
+  // AI COLLECTED JOBS QUEUE & AUTOMATION
+  // ---------------------------------------------------------------------------
+  public getCollectedJobs(params: { status?: CollectedJobStatus; isDuplicate?: boolean; limit?: number; offset?: number } = {}) {
+    let result = [...this.collectedJobs];
+    if (params.status) {
+      result = result.filter((j) => j.status === params.status);
+    }
+    if (params.isDuplicate !== undefined) {
+      result = result.filter((j) => j.is_duplicate === params.isDuplicate);
+    }
+    const total = result.length;
+    const offset = params.offset || 0;
+    const limit = params.limit || 50;
+    const items = result.slice(offset, offset + limit);
+    return { items, total };
+  }
+
+  public getCollectedJobById(id: string): CollectedJob | null {
+    return this.collectedJobs.find((j) => j.id === id) || null;
+  }
+
+  public getCollectorStats(): CollectorStats {
+    const total = this.collectedJobs.length;
+    const pending = this.collectedJobs.filter((j) => j.status === 'pending').length;
+    const approved = this.collectedJobs.filter((j) => j.status === 'approved').length;
+    const rejected = this.collectedJobs.filter((j) => j.status === 'rejected').length;
+    const published = this.collectedJobs.filter((j) => j.status === 'published').length;
+    const duplicates = this.collectedJobs.filter((j) => j.is_duplicate).length;
+    const lastRun = this.collectorRuns[0];
+
+    return {
+      total,
+      pending,
+      approved,
+      rejected,
+      published,
+      duplicates,
+      lastRun,
+    };
+  }
+
+  public saveCollectedJob(jobData: Partial<CollectedJob>): CollectedJob {
+    const id = jobData.id || `col-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+    const now = new Date().toISOString();
+    const normalizedUrl = normalizeUrl(jobData.official_apply_url);
+    const normalizedKey = generateMatchKey(jobData.company_name || '', jobData.title || '');
+
+    const newJob: CollectedJob = {
+      id,
+      source_name: jobData.source_name || 'Permitted Feed',
+      source_url: jobData.source_url,
+      raw_title: jobData.raw_title,
+      raw_company: jobData.raw_company,
+      raw_content: jobData.raw_content,
+      extracted_data: jobData.extracted_data || {},
+      status: jobData.status || 'pending',
+      is_duplicate: jobData.is_duplicate ?? false,
+      duplicate_reason: jobData.duplicate_reason,
+      matched_job_id: jobData.matched_job_id,
+      published_job_id: jobData.published_job_id,
+      rejection_reason: jobData.rejection_reason,
+      title: jobData.title || 'Untitled Opening',
+      company_name: jobData.company_name || 'Company',
+      category_slug: jobData.category_slug || 'it-software',
+      location: jobData.location || 'Pan India',
+      work_mode: jobData.work_mode || 'In-Office',
+      job_type: jobData.job_type || 'Full-Time',
+      experience_level: jobData.experience_level || '0-2 Years',
+      experience_min: jobData.experience_min ?? 0,
+      experience_max: jobData.experience_max ?? 2,
+      salary_text: jobData.salary_text || 'Not Disclosed',
+      salary_min: jobData.salary_min,
+      salary_max: jobData.salary_max,
+      qualification: jobData.qualification || 'Graduate / Diploma / Degree',
+      skills: jobData.skills || [],
+      description: jobData.description || '',
+      responsibilities: jobData.responsibilities || [],
+      eligibility_criteria: jobData.eligibility_criteria || [],
+      application_deadline: jobData.application_deadline,
+      official_apply_url: jobData.official_apply_url || 'https://careers.google.com',
+      is_fresher: jobData.is_fresher ?? false,
+      is_government: jobData.is_government ?? false,
+      is_wfh: jobData.is_wfh ?? false,
+      is_internship: jobData.is_internship ?? false,
+      is_walkin: jobData.is_walkin ?? false,
+      normalized_url: normalizedUrl,
+      normalized_key: normalizedKey,
+      created_at: jobData.created_at || now,
+      updated_at: now,
+    };
+
+    this.collectedJobs.unshift(newJob);
+    return newJob;
+  }
+
+  public updateCollectedJob(id: string, updates: Partial<CollectedJob>): CollectedJob | null {
+    const idx = this.collectedJobs.findIndex((j) => j.id === id);
+    if (idx === -1) return null;
+    this.collectedJobs[idx] = {
+      ...this.collectedJobs[idx],
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    return this.collectedJobs[idx];
+  }
+
+  public deleteCollectedJob(id: string): boolean {
+    const prev = this.collectedJobs.length;
+    this.collectedJobs = this.collectedJobs.filter((j) => j.id !== id);
+    return this.collectedJobs.length < prev;
+  }
+
+  public recordCollectorRun(runData: Omit<CollectorRun, 'id' | 'started_at'>): CollectorRun {
+    const run: CollectorRun = {
+      id: `run-${Date.now()}`,
+      started_at: new Date().toISOString(),
+      completed_at: new Date().toISOString(),
+      ...runData,
+    };
+    this.collectorRuns.unshift(run);
+    return run;
+  }
+
+  public unpublishExpiredJobs(): number {
+    let count = 0;
+    this.jobs.forEach((j) => {
+      if (j.is_published && isJobExpired(j.application_deadline)) {
+        j.is_published = false;
+        count++;
+      }
+    });
+    return count;
   }
 
   // ---------------------------------------------------------------------------
@@ -1752,4 +2036,404 @@ export async function togglePublishJobAsync(id: string, currentStatus?: boolean)
   }
 
   return newStatus;
+}
+
+// ==============================================================================
+// ASYNC COLLECTOR QUEUE & AUTOMATION FUNCTIONS
+// ==============================================================================
+
+export async function fetchCollectedJobsAsync(params: {
+  status?: CollectedJobStatus;
+  isDuplicate?: boolean;
+  limit?: number;
+  offset?: number;
+} = {}): Promise<{ items: CollectedJob[]; total: number }> {
+  const supabase = getSupabaseAdmin() || getSupabaseClient();
+
+  if (supabase && isSupabaseConfigured) {
+    try {
+      let query = supabase.from('collected_jobs').select('*', { count: 'exact' });
+
+      if (params.status) {
+        query = query.eq('status', params.status);
+      }
+      if (params.isDuplicate !== undefined) {
+        query = query.eq('is_duplicate', params.isDuplicate);
+      }
+
+      query = query.order('created_at', { ascending: false });
+
+      if (params.limit) {
+        const offset = params.offset || 0;
+        query = query.range(offset, offset + params.limit - 1);
+      }
+
+      const { data, count, error } = await query;
+      if (!error && data) {
+        return {
+          items: data as CollectedJob[],
+          total: count ?? data.length,
+        };
+      }
+    } catch (err) {
+      console.warn('Supabase fetchCollectedJobs error, falling back to localStore:', err);
+    }
+  }
+
+  return localStore.getCollectedJobs(params);
+}
+
+export async function fetchCollectorStatsAsync(): Promise<CollectorStats> {
+  const supabase = getSupabaseAdmin() || getSupabaseClient();
+
+  if (supabase && isSupabaseConfigured) {
+    try {
+      const [allRes, pendingRes, approvedRes, rejectedRes, publishedRes, dupRes, lastRunRes] = await Promise.all([
+        supabase.from('collected_jobs').select('id', { count: 'exact', head: true }),
+        supabase.from('collected_jobs').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+        supabase.from('collected_jobs').select('id', { count: 'exact', head: true }).eq('status', 'approved'),
+        supabase.from('collected_jobs').select('id', { count: 'exact', head: true }).eq('status', 'rejected'),
+        supabase.from('collected_jobs').select('id', { count: 'exact', head: true }).eq('status', 'published'),
+        supabase.from('collected_jobs').select('id', { count: 'exact', head: true }).eq('is_duplicate', true),
+        supabase.from('collector_runs').select('*').order('started_at', { ascending: false }).limit(1).maybeSingle(),
+      ]);
+
+      if (!allRes.error) {
+        return {
+          total: allRes.count ?? 0,
+          pending: pendingRes.count ?? 0,
+          approved: approvedRes.count ?? 0,
+          rejected: rejectedRes.count ?? 0,
+          published: publishedRes.count ?? 0,
+          duplicates: dupRes.count ?? 0,
+          lastRun: lastRunRes.data as CollectorRun | undefined,
+        };
+      }
+    } catch (err) {
+      console.warn('Supabase fetchCollectorStats error, falling back to localStore:', err);
+    }
+  }
+
+  return localStore.getCollectorStats();
+}
+
+export async function saveCollectedJobAsync(jobData: Partial<CollectedJob>): Promise<CollectedJob> {
+  const localJob = localStore.saveCollectedJob(jobData);
+  const supabase = getSupabaseAdmin();
+
+  if (supabase && isSupabaseConfigured) {
+    try {
+      const { data, error } = await supabase
+        .from('collected_jobs')
+        .insert({
+          source_name: jobData.source_name || 'Permitted Feed',
+          source_url: jobData.source_url,
+          raw_title: jobData.raw_title,
+          raw_company: jobData.raw_company,
+          raw_content: jobData.raw_content,
+          extracted_data: jobData.extracted_data || {},
+          status: jobData.status || 'pending',
+          is_duplicate: jobData.is_duplicate ?? false,
+          duplicate_reason: jobData.duplicate_reason,
+          matched_job_id: isValidUUID(jobData.matched_job_id) ? jobData.matched_job_id : null,
+          title: jobData.title || 'Untitled Opening',
+          company_name: jobData.company_name || 'Company',
+          category_slug: jobData.category_slug || 'it-software',
+          location: jobData.location || 'Pan India',
+          work_mode: jobData.work_mode || 'In-Office',
+          job_type: jobData.job_type || 'Full-Time',
+          experience_level: jobData.experience_level || '0-2 Years',
+          experience_min: jobData.experience_min ?? 0,
+          experience_max: jobData.experience_max ?? 2,
+          salary_min: jobData.salary_min,
+          salary_max: jobData.salary_max,
+          salary_text: jobData.salary_text || 'Not Disclosed',
+          qualification: jobData.qualification || 'Graduate / Diploma / Degree',
+          skills: jobData.skills || [],
+          description: jobData.description || '',
+          responsibilities: jobData.responsibilities || [],
+          eligibility_criteria: jobData.eligibility_criteria || [],
+          application_deadline: jobData.application_deadline,
+          official_apply_url: jobData.official_apply_url || 'https://careers.google.com',
+          is_fresher: jobData.is_fresher ?? false,
+          is_government: jobData.is_government ?? false,
+          is_wfh: jobData.is_wfh ?? false,
+          is_internship: jobData.is_internship ?? false,
+          is_walkin: jobData.is_walkin ?? false,
+          normalized_url: normalizeUrl(jobData.official_apply_url),
+          normalized_key: generateMatchKey(jobData.company_name || '', jobData.title || ''),
+        })
+        .select()
+        .single();
+
+      if (!error && data) {
+        return data as CollectedJob;
+      }
+    } catch (err) {
+      console.warn('Supabase saveCollectedJob error:', err);
+    }
+  }
+
+  return localJob;
+}
+
+export async function updateCollectedJobAsync(
+  id: string,
+  updates: Partial<CollectedJob>
+): Promise<CollectedJob | null> {
+  const localUpdated = localStore.updateCollectedJob(id, updates);
+  const supabase = getSupabaseAdmin();
+
+  if (supabase && isSupabaseConfigured && isValidUUID(id)) {
+    try {
+      const { data, error } = await supabase
+        .from('collected_jobs')
+        .update({
+          ...updates,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (!error && data) {
+        return data as CollectedJob;
+      }
+    } catch (err) {
+      console.warn('Supabase updateCollectedJob error:', err);
+    }
+  }
+
+  return localUpdated;
+}
+
+export async function deleteCollectedJobAsync(id: string): Promise<boolean> {
+  const localDeleted = localStore.deleteCollectedJob(id);
+  const supabase = getSupabaseAdmin();
+
+  if (supabase && isSupabaseConfigured && isValidUUID(id)) {
+    try {
+      const { error } = await supabase.from('collected_jobs').delete().eq('id', id);
+      if (!error) return true;
+    } catch (err) {
+      console.warn('Supabase deleteCollectedJob error:', err);
+    }
+  }
+
+  return localDeleted;
+}
+
+/**
+ * Approves and promotes a collected job directly into public.jobs with is_published=true
+ */
+export async function approveAndPublishJobAsync(
+  id: string,
+  editedData?: Partial<CollectedJob>
+): Promise<{ success: boolean; publishedJob?: Job; error?: string }> {
+  // 1. Fetch current collected job
+  let target = localStore.getCollectedJobById(id);
+  const supabase = getSupabaseAdmin();
+
+  if (supabase && isSupabaseConfigured && isValidUUID(id)) {
+    const { data } = await supabase.from('collected_jobs').select('*').eq('id', id).single();
+    if (data) {
+      target = data as CollectedJob;
+    }
+  }
+
+  if (!target) {
+    return { success: false, error: 'Collected job not found' };
+  }
+
+  // Merge any edits made during approval
+  const finalData = { ...target, ...editedData };
+
+  // 1b. Validate application URL (Must be a valid web URL)
+  if (!finalData.official_apply_url || typeof finalData.official_apply_url !== 'string') {
+    return { success: false, error: 'Official application URL is required.' };
+  }
+  try {
+    const parsedUrl = new URL(finalData.official_apply_url.trim());
+    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+      return { success: false, error: 'Invalid application link protocol. Only HTTP and HTTPS URLs are permitted.' };
+    }
+  } catch {
+    return { success: false, error: 'Invalid application URL format. Please provide a valid web link.' };
+  }
+
+  // 1c. Reject publishing if deadline has already passed
+  if (finalData.application_deadline) {
+    const deadlineDate = new Date(finalData.application_deadline);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (!isNaN(deadlineDate.getTime()) && deadlineDate < today) {
+      return {
+        success: false,
+        error: `Cannot publish expired job opening. The application deadline (${finalData.application_deadline}) has already passed.`,
+      };
+    }
+  }
+
+  // 2. Resolve or create Company
+  let companyId: string | undefined;
+  const compSlug = slugify(finalData.company_name);
+
+  if (supabase && isSupabaseConfigured) {
+    const { data: existingComp } = await supabase
+      .from('companies')
+      .select('id')
+      .eq('slug', compSlug)
+      .maybeSingle();
+
+    if (existingComp) {
+      companyId = existingComp.id;
+    } else {
+      const { data: newComp } = await supabase
+        .from('companies')
+        .insert({
+          name: finalData.company_name,
+          slug: compSlug,
+          website_url: finalData.official_apply_url ? new URL(finalData.official_apply_url).origin : undefined,
+          verified: true,
+        })
+        .select('id')
+        .single();
+
+      if (newComp) companyId = newComp.id;
+    }
+  }
+
+  if (!companyId) {
+    // Local fallback
+    const localComp = localStore.getCompanies().find((c) => c.slug === compSlug);
+    if (localComp) {
+      companyId = localComp.id;
+    } else {
+      const createdComp = localStore.createCompany({
+        name: finalData.company_name,
+        slug: compSlug,
+        verified: true,
+      });
+      companyId = createdComp.id;
+    }
+  }
+
+  // 3. Resolve Category
+  let categoryId: string | undefined;
+  if (supabase && isSupabaseConfigured) {
+    const { data: dbCat } = await supabase
+      .from('categories')
+      .select('id')
+      .eq('slug', finalData.category_slug || 'it-software')
+      .maybeSingle();
+    if (dbCat) categoryId = dbCat.id;
+  }
+  if (!categoryId) {
+    const localCat = localStore.getCategories().find((c) => c.slug === (finalData.category_slug || 'it-software'));
+    categoryId = localCat?.id || 'c-it-software';
+  }
+
+  // 4. Create verified active job in public.jobs
+  const publishedJob = await createJobAsync({
+    title: finalData.title,
+    company_id: companyId,
+    category_id: categoryId,
+    location: finalData.location,
+    work_mode: finalData.work_mode,
+    job_type: finalData.job_type,
+    experience_level: finalData.experience_level,
+    experience_min: finalData.experience_min,
+    experience_max: finalData.experience_max,
+    salary_text: finalData.salary_text,
+    salary_min: finalData.salary_min,
+    salary_max: finalData.salary_max,
+    qualification: finalData.qualification,
+    skills: finalData.skills,
+    description: finalData.description,
+    responsibilities: finalData.responsibilities,
+    eligibility_criteria: finalData.eligibility_criteria,
+    application_deadline: finalData.application_deadline,
+    official_apply_url: finalData.official_apply_url,
+    source_url: finalData.source_url,
+    is_fresher: finalData.is_fresher,
+    is_government: finalData.is_government,
+    is_wfh: finalData.is_wfh,
+    is_internship: finalData.is_internship,
+    is_walkin: finalData.is_walkin,
+    is_published: true, // PUBLISHED TO LIVE DIRECTORY!
+  });
+
+  // 5. Update collected job status to 'published'
+  await updateCollectedJobAsync(id, {
+    status: 'published',
+    published_job_id: publishedJob.id,
+    reviewed_at: new Date().toISOString(),
+  });
+
+  return { success: true, publishedJob };
+}
+
+export async function recordCollectorRunAsync(
+  runData: Omit<CollectorRun, 'id' | 'started_at'>
+): Promise<CollectorRun> {
+  const localRun = localStore.recordCollectorRun(runData);
+  const supabase = getSupabaseAdmin();
+
+  if (supabase && isSupabaseConfigured) {
+    try {
+      const { data, error } = await supabase
+        .from('collector_runs')
+        .insert({
+          triggered_by: runData.triggered_by,
+          jobs_collected: runData.jobs_collected,
+          jobs_pending: runData.jobs_pending,
+          duplicates_found: runData.duplicates_found,
+          status: runData.status,
+          error_log: runData.error_log,
+          completed_at: new Date().toISOString(),
+        })
+        .select()
+        .single();
+
+      if (!error && data) {
+        return data as CollectorRun;
+      }
+    } catch (err) {
+      console.warn('Supabase recordCollectorRun error:', err);
+    }
+  }
+
+  return localRun;
+}
+
+export async function unpublishExpiredJobsAsync(): Promise<number> {
+  const localCount = localStore.unpublishExpiredJobs();
+  const supabase = getSupabaseAdmin();
+
+  if (supabase && isSupabaseConfigured) {
+    try {
+      // 1. Try RPC function if created
+      const { data: rpcData, error: rpcError } = await supabase.rpc('unpublish_expired_jobs');
+      if (!rpcError && typeof rpcData === 'number') {
+        return rpcData;
+      }
+
+      // 2. Fallback direct UPDATE query
+      const today = new Date().toISOString().split('T')[0];
+      const { data, error } = await supabase
+        .from('jobs')
+        .update({ is_published: false, updated_at: new Date().toISOString() })
+        .lt('application_deadline', today)
+        .eq('is_published', true)
+        .select('id');
+
+      if (!error && data) {
+        return data.length;
+      }
+    } catch (err) {
+      console.warn('Supabase unpublishExpiredJobs error:', err);
+    }
+  }
+
+  return localCount;
 }

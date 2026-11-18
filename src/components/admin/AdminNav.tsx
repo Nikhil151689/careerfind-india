@@ -13,7 +13,8 @@ import {
   PlusCircle, 
   LogOut,
   LayoutDashboard,
-  ExternalLink
+  ExternalLink,
+  Sparkles
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { getSupabaseClient, isSupabaseConfigured } from '@/lib/supabase';
@@ -39,6 +40,7 @@ export default function AdminNav() {
   const navItems = [
     { label: 'Overview', href: '/admin', icon: LayoutDashboard },
     { label: 'Manage Jobs', href: '/admin/jobs', icon: Briefcase },
+    { label: 'AI Job Collector', href: '/admin/collector', icon: Sparkles },
     { label: 'Post New Job', href: '/admin/jobs/new', icon: PlusCircle },
     { label: 'Categories', href: '/admin/categories', icon: FolderTree },
     { label: 'Subscribers', href: '/admin/subscribers', icon: Users },

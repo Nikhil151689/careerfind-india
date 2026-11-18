@@ -120,3 +120,76 @@ export interface AdminProfile {
   full_name?: string;
   role: 'super_admin' | 'admin' | 'editor';
 }
+
+export type CollectedJobStatus = 'pending' | 'approved' | 'rejected' | 'published';
+
+export interface ExtractedJobPayload {
+  title: string;
+  company_name: string;
+  category_slug?: string;
+  location: string;
+  work_mode: WorkMode;
+  job_type: JobType;
+  experience_level: ExperienceLevel;
+  experience_min: number;
+  experience_max: number;
+  salary_text: string;
+  salary_min?: number;
+  salary_max?: number;
+  qualification: string;
+  skills: string[];
+  description: string;
+  responsibilities: string[];
+  eligibility_criteria: string[];
+  application_deadline?: string;
+  official_apply_url: string;
+  source_url?: string;
+  is_fresher: boolean;
+  is_government: boolean;
+  is_wfh: boolean;
+  is_internship: boolean;
+  is_walkin: boolean;
+}
+
+export interface CollectedJob extends ExtractedJobPayload {
+  id: string;
+  source_name: string;
+  raw_title?: string;
+  raw_company?: string;
+  raw_content?: string;
+  extracted_data?: Record<string, unknown>;
+  status: CollectedJobStatus;
+  is_duplicate: boolean;
+  duplicate_reason?: string;
+  matched_job_id?: string;
+  published_job_id?: string;
+  rejection_reason?: string;
+  normalized_url?: string;
+  normalized_key?: string;
+  reviewed_by?: string;
+  reviewed_at?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface CollectorRun {
+  id: string;
+  triggered_by: 'n8n_cron' | 'admin_manual' | 'webhook';
+  jobs_collected: number;
+  jobs_pending: number;
+  duplicates_found: number;
+  status: 'running' | 'completed' | 'failed';
+  error_log?: string;
+  started_at: string;
+  completed_at?: string;
+}
+
+export interface CollectorStats {
+  total: number;
+  pending: number;
+  approved: number;
+  rejected: number;
+  published: number;
+  duplicates: number;
+  lastRun?: CollectorRun;
+}
